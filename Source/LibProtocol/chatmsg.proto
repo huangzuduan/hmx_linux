@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package protobuf;
+
+// 公共信箱，不指定谁可以看，有密码就可以看见，同时还要以进行处理
+message MsgConent
+{
+	optional int64 msgid = 1; 		// 消息ID
+	optional int64 senduid = 2;		// 发送者ID
+	optional string sendname = 3;	// 发送者名字
+	optional int32 sendtime = 4; 	// 发送时间
+	optional string conent = 5;		// 消息内容
+}
+
+// 消息标记
+message MsgMark
+{
+	optional int32 opentime = 1; // 最早读取时间
+	optional int32 lasttime = 2; // 最近读取时间
+	repeated int64 readuids = 3; // 读取过UID
+}
+
+message ChatMsgBinary 
+{
+	optional MsgConent conent = 1;
+}
+
+
+

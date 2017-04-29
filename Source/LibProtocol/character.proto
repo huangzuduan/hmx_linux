@@ -1,0 +1,78 @@
+syntax = "proto2";
+
+package protobuf;
+
+// 计数器 
+message Counter
+{
+	optional int32 itemid = 1;
+	optional int32 itemval = 2;
+	optional int32 starttime = 3;
+	optional int32 endtime = 4;
+}
+
+message CounterProto
+{
+	repeated Counter counter = 1; 
+}
+
+//消息的结构体
+message MsgObject
+{
+	optional string conent = 1;
+}
+
+// 单条信息数据全部数据
+message RelChatMsg
+{
+	optional int64 msgid = 1; 		// 唯一消息编号
+	optional int64 senduid = 2;		// 发送者ID
+	optional string sendname = 3;	// 发送者名字
+	optional int64 recvuid = 4;		// 接收者ID
+	optional string recvname = 5;	// 接收者名字
+	optional int32 sendtime = 6;	// 发送时间
+	optional MsgObject msgobj =7;	// 消息的结构体	
+}
+
+// 成员聊天信息
+message RelChatProto
+{
+	repeated RelChatMsg msglist = 1;
+}
+
+// 社会成员
+message Relation
+{
+	optional int64 uid = 1;
+	optional string name = 2;
+	optional int32 rel = 3;
+	optional int32 createtime = 4;
+	optional int32 dealreltime = 5;
+	optional RelChatProto relchat = 6; //与该成员的聊天信息
+}
+
+// 社会关系
+message RelationProto
+{
+	repeated Relation relation = 1;
+}
+
+// 角色二进制数据 
+message UserBinary 
+{
+	optional CounterProto counters = 1;	// 计数器 
+	optional RelationProto relations = 3;   
+}
+
+
+// 离线数据角色表（WS）
+message WsUser
+{
+	optional int64 char_id = 1;
+	optional int64 account_id = 2;
+	optional string name = 3;
+	optional int32 type = 4;
+	optional int32 level = 5;
+}
+
+
